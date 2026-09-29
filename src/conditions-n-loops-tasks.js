@@ -107,8 +107,24 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const NumsMap = {
+    1: 'I',
+    2: 'II',
+    3: 'III',
+    4: 'IV',
+    5: 'V',
+    6: 'VI',
+    7: 'VII',
+    8: 'VIII',
+    9: 'IX',
+    10: 'X',
+    20: 'XX',
+    30: 'XXX',
+  };
+  const dec = Math.floor(num / 10) * 10;
+  const units = num % 10;
+  return `${NumsMap[dec] ?? ''}${NumsMap[units] ?? ''}`;
 }
 
 /**
@@ -126,8 +142,45 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const nums = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-': {
+        result += `minus `;
+        break;
+      }
+      case '.': {
+        result += 'point ';
+        break;
+      }
+      case ',': {
+        result += `point `;
+        break;
+      }
+      default: {
+        result +=
+          i === numberStr.length - 1
+            ? nums[+numberStr[i]]
+            : `${nums[+numberStr[i]]} `;
+        break;
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -142,8 +195,14 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const half = Math.floor(str.length / 2);
+  for (let i = 0; i <= half; i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -160,8 +219,11 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) return i;
+  }
+  return -1;
 }
 
 /**
@@ -179,8 +241,12 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const numStr = `${num}`;
+  for (let i = 0; i < numStr.length; i += 1) {
+    if (numStr[i] === `${digit}`) return true;
+  }
+  return false;
 }
 
 /**
